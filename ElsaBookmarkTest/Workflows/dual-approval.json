@@ -1,0 +1,155 @@
+{
+  "$id": "1",
+  "definitionId": "a19c8a471c284667b5547db940f07d2a",
+  "versionId": "0c87b145d92c462ba10059b26c46f9e2",
+  "name": "DualApproval",
+  "displayName": "Dual Approval",
+  "version": 1,
+  "variables": {
+    "$id": "2",
+    "data": {}
+  },
+  "customAttributes": {
+    "$id": "3",
+    "data": {}
+  },
+  "isSingleton": false,
+  "persistenceBehavior": "WorkflowBurst",
+  "deleteCompletedInstances": false,
+  "isPublished": true,
+  "isLatest": true,
+  "createdAt": "2023-10-04T15:11:51.2701478Z",
+  "activities": [
+    {
+      "$id": "4",
+      "activityId": "004c2d2d-28a3-4e5d-8b0d-6eba5a0453c4",
+      "type": "SetName",
+      "name": "Set Double Name",
+      "displayName": "Set Name",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "5",
+          "name": "Value",
+          "expressions": {
+            "$id": "6",
+            "Literal": "Its a double trap"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "7"
+      }
+    },
+    {
+      "$id": "8",
+      "activityId": "3d85129f-0f2a-4345-90f2-19cf5c6f892e",
+      "type": "UserTask",
+      "name": "FirstApproval",
+      "displayName": "FirstApproval",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "9",
+          "name": "Actions",
+          "expressions": {
+            "$id": "10",
+            "Json": "[\"Approve\",\"Reject\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "11"
+      }
+    },
+    {
+      "$id": "12",
+      "activityId": "b45ec108-b4d8-43c8-87ff-5a2cd20ebe71",
+      "type": "UserTask",
+      "name": "SecondApproval",
+      "displayName": "SecondApproval",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "13",
+          "name": "Actions",
+          "expressions": {
+            "$id": "14",
+            "Json": "[\"Approve\",\"Reject\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "15"
+      }
+    },
+    {
+      "$id": "16",
+      "activityId": "e3aed0b4-1d1a-4056-b2bf-9dd4dad8d7e6",
+      "type": "Finish",
+      "name": "Finish",
+      "displayName": "Finish",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "17",
+          "name": "ActivityOutput",
+          "expressions": {
+            "$id": "18"
+          }
+        },
+        {
+          "$id": "19",
+          "name": "OutcomeNames",
+          "expressions": {
+            "$id": "20"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "21"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "$id": "22",
+      "sourceActivityId": "004c2d2d-28a3-4e5d-8b0d-6eba5a0453c4",
+      "targetActivityId": "3d85129f-0f2a-4345-90f2-19cf5c6f892e",
+      "outcome": "Done"
+    },
+    {
+      "$id": "23",
+      "sourceActivityId": "3d85129f-0f2a-4345-90f2-19cf5c6f892e",
+      "targetActivityId": "b45ec108-b4d8-43c8-87ff-5a2cd20ebe71",
+      "outcome": "Approve"
+    },
+    {
+      "$id": "24",
+      "sourceActivityId": "b45ec108-b4d8-43c8-87ff-5a2cd20ebe71",
+      "targetActivityId": "e3aed0b4-1d1a-4056-b2bf-9dd4dad8d7e6",
+      "outcome": "Approve"
+    },
+    {
+      "$id": "25",
+      "sourceActivityId": "b45ec108-b4d8-43c8-87ff-5a2cd20ebe71",
+      "targetActivityId": "e3aed0b4-1d1a-4056-b2bf-9dd4dad8d7e6",
+      "outcome": "Reject"
+    },
+    {
+      "$id": "26",
+      "sourceActivityId": "3d85129f-0f2a-4345-90f2-19cf5c6f892e",
+      "targetActivityId": "e3aed0b4-1d1a-4056-b2bf-9dd4dad8d7e6",
+      "outcome": "Reject"
+    }
+  ],
+  "id": "0c87b145d92c462ba10059b26c46f9e2"
+}

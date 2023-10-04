@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WorkflowInstance>
+@using Elsa.Models
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <form method="post" asp-action="CreateWorkflowItem">
+        <button class="btn-primary" type="submit" value="BasicApproval" name="workflowName">Create Basic Approval item</button>
+        <button class="btn-primary" type="submit" value="DualApproval" name="workflowName">Create Dual Approval item</button>
+    </form>
+</div>
+
+<table class="w-100 table-bordered table-striped table-primary mt-5">
+    <thead>
+        <tr>
+            <td>Status</td>
+            <td>Id</td>
+            <td>CorrelationId</td>
+            <td>Name</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (WorkflowInstance i in Model)
+            {
+                <tr>
+                    <td>@i.WorkflowStatus.ToString()</td>
+                    <td>@i.Id</td>
+                    <td>@i.CorrelationId</td>
+                    <td>@i.Name</td>
+                    <td>
+                        @if (i.BlockingActivities.Any())
+                        {
+                            var blockingActivity = i.BlockingActivities.First();
+                            var activityId = blockingActivity.ActivityId;
+                            var actions = (List<string>?)i.ActivityData[activityId]["Actions"];
+                            if (actions != null)
+                            {
+                                <form method="post" asp-action="SendWorkflowAction" asp-route-instanceId="@i.Id" asp-route-correlationId="@i.CorrelationId" asp-route-activityId="@activityId">
+                                    @foreach (var action in actions)
+                                    {
+                                        <button class="btn-primary" type="submit" value="@action" name="action">@action</button>
+                                    }
+                                </form>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No instances found</td>
+            </tr>
+        }
+    </tbody>
+</table>

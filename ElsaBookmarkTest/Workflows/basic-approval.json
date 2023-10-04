@@ -1,0 +1,120 @@
+{
+  "$id": "1",
+  "definitionId": "6a1fcef475d64fb6b843c5d054b6b2b3",
+  "versionId": "3d36043814a240acb3b68384d6c740be",
+  "name": "BasicApproval",
+  "displayName": "Basic Approval Workflow",
+  "version": 1,
+  "variables": {
+    "$id": "2",
+    "data": {}
+  },
+  "customAttributes": {
+    "$id": "3",
+    "data": {}
+  },
+  "isSingleton": false,
+  "persistenceBehavior": "WorkflowBurst",
+  "deleteCompletedInstances": false,
+  "isPublished": true,
+  "isLatest": true,
+  "createdAt": "2023-10-04T13:55:18.674599Z",
+  "activities": [
+    {
+      "$id": "4",
+      "activityId": "1c40ad5b-1af7-4f68-810d-fce7f7b92378",
+      "type": "UserTask",
+      "name": "ApprovalUserTask",
+      "displayName": "User Task",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "5",
+          "name": "Actions",
+          "expressions": {
+            "$id": "6",
+            "Json": "[\"Approve\",\"Reject\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "7"
+      }
+    },
+    {
+      "$id": "8",
+      "activityId": "732e1681-dc5f-4869-9ed4-7fba4e3cea4f",
+      "type": "Finish",
+      "name": "Finish",
+      "displayName": "Finish",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "9",
+          "name": "ActivityOutput",
+          "expressions": {
+            "$id": "10"
+          }
+        },
+        {
+          "$id": "11",
+          "name": "OutcomeNames",
+          "expressions": {
+            "$id": "12"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "13"
+      }
+    },
+    {
+      "$id": "14",
+      "activityId": "1e932d9d-584d-426a-9904-e108f28a5bc1",
+      "type": "SetName",
+      "name": "SetName",
+      "displayName": "Set Name",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "15",
+          "name": "Value",
+          "expressions": {
+            "$id": "16",
+            "Literal": "ItsATest"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "17"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "$id": "18",
+      "sourceActivityId": "1c40ad5b-1af7-4f68-810d-fce7f7b92378",
+      "targetActivityId": "732e1681-dc5f-4869-9ed4-7fba4e3cea4f",
+      "outcome": "Reject"
+    },
+    {
+      "$id": "19",
+      "sourceActivityId": "1c40ad5b-1af7-4f68-810d-fce7f7b92378",
+      "targetActivityId": "732e1681-dc5f-4869-9ed4-7fba4e3cea4f",
+      "outcome": "Approve"
+    },
+    {
+      "$id": "20",
+      "sourceActivityId": "1e932d9d-584d-426a-9904-e108f28a5bc1",
+      "targetActivityId": "1c40ad5b-1af7-4f68-810d-fce7f7b92378",
+      "outcome": "Done"
+    }
+  ],
+  "id": "3d36043814a240acb3b68384d6c740be"
+}
