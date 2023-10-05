@@ -3,7 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaBookmarkTest", "ElsaBookmarkTest\ElsaBookmarkTest.csproj", "{F7BCE5AD-EAE7-4D08-B06F-83C671F385C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElsaBookmarkTest", "ElsaBookmarkTest\ElsaBookmarkTest.csproj", "{F7BCE5AD-EAE7-4D08-B06F-83C671F385C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElsaBookmarkViaClient", "ElsaBookmarkViaClient\ElsaBookmarkViaClient.csproj", "{C3A2FCAF-072D-41ED-958B-0113D9D72642}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Client.Extended", "Elsa.Client.Extended\Elsa.Client.Extended.csproj", "{DC6240B0-1F64-4E5B-A222-98B701B4F7BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Server.Api.Extended", "Elsa.Server.Api.Extended\Elsa.Server.Api.Extended.csproj", "{ADDE0053-510E-49E5-903A-ECE26F3D3935}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ElsaExtended", "ElsaExtended", "{0BB0C66E-606D-47CE-A639-564653809DDC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elsa.Activities.UserTask.Api", "Elsa.Activities.UserTask.Api\Elsa.Activities.UserTask.Api.csproj", "{96283F57-4829-454E-93EB-F82FCA607069}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FAC71288-E804-435E-B452-CE14E54A7607}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +31,30 @@ Global
 		{F7BCE5AD-EAE7-4D08-B06F-83C671F385C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7BCE5AD-EAE7-4D08-B06F-83C671F385C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7BCE5AD-EAE7-4D08-B06F-83C671F385C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A2FCAF-072D-41ED-958B-0113D9D72642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A2FCAF-072D-41ED-958B-0113D9D72642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A2FCAF-072D-41ED-958B-0113D9D72642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A2FCAF-072D-41ED-958B-0113D9D72642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6240B0-1F64-4E5B-A222-98B701B4F7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6240B0-1F64-4E5B-A222-98B701B4F7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6240B0-1F64-4E5B-A222-98B701B4F7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6240B0-1F64-4E5B-A222-98B701B4F7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDE0053-510E-49E5-903A-ECE26F3D3935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDE0053-510E-49E5-903A-ECE26F3D3935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDE0053-510E-49E5-903A-ECE26F3D3935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDE0053-510E-49E5-903A-ECE26F3D3935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96283F57-4829-454E-93EB-F82FCA607069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96283F57-4829-454E-93EB-F82FCA607069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96283F57-4829-454E-93EB-F82FCA607069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96283F57-4829-454E-93EB-F82FCA607069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC6240B0-1F64-4E5B-A222-98B701B4F7BB} = {0BB0C66E-606D-47CE-A639-564653809DDC}
+		{ADDE0053-510E-49E5-903A-ECE26F3D3935} = {0BB0C66E-606D-47CE-A639-564653809DDC}
+		{96283F57-4829-454E-93EB-F82FCA607069} = {0BB0C66E-606D-47CE-A639-564653809DDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27C2A5E9-72A8-4DD3-9C0A-781E29A91564}

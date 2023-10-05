@@ -1,0 +1,15 @@
+﻿@inject IConfiguration Configuration
+@using Elsa.Client.Options
+@{
+    ViewData["Title"] = "Elsa Dashbaord";
+
+    var elsaServerConfig = Configuration.GetSection("Elsa").GetSection("Server").Get<ElsaClientOptions>();
+}
+<elsa-studio-root server-url="@elsaServerConfig.ServerUrl" monaco-lib-path="_content/Elsa.Designer.Components.Web/monaco-editor/min">
+    <elsa-studio-dashboard></elsa-studio-dashboard>
+</elsa-studio-root>
+
+<script src="/_content/Elsa.Designer.Components.Web/monaco-editor/min/vs/loader.js" asp-append-version="true"></script>
+<script type="module" src="/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/elsa-workflows-studio.esm.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/assets/fonts/inter/inter.css" asp-append-version="true" />
+<link rel="stylesheet" href="/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/elsa-workflows-studio.css" asp-append-version="true" />

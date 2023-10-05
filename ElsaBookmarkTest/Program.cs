@@ -13,7 +13,6 @@ namespace ElsaBookmarkTest
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var elsaSection = builder.Configuration.GetSection("Elsa");
             var elsaDbConn = builder.Configuration.GetConnectionString("ElsaConnection") ?? throw new NotSupportedException("ElsaConnection is empty");
 
             // Add services to the container.

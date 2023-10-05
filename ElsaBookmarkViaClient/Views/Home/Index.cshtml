@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<WorkflowInstance>
-@using Elsa.Models
+@using Elsa.Client.Models
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -35,8 +35,8 @@
                         {
                             var blockingActivity = i.BlockingActivities.First();
                             var activityId = blockingActivity.ActivityId;
-                            var actions = (List<string>?)i.ActivityData[activityId]["Actions"];
-                            if (actions != null)
+                            var actions = i.ActivityData[activityId];
+                            if (actions != null && actions["Actions"] != null)
                             {
                                 <form method="post" asp-action="SendWorkflowAction" asp-route-instanceId="@i.Id" asp-route-correlationId="@i.CorrelationId" asp-route-activityId="@activityId">
                                     @foreach (var action in actions)
