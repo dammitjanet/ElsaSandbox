@@ -1,7 +1,7 @@
 {
   "$id": "1",
-  "definitionId": "b8141ed536134c7bb5c805cad2afc4da",
-  "versionId": "17d2c3108a5b4bfbb0bbbdc07e7393dd",
+  "definitionId": "d18fa8c9422a4208a3d1269c2ee56896",
+  "versionId": "02b672629120469292970668b2ac375f",
   "name": "SingleOutcome",
   "displayName": "Single Outcome UserTask",
   "version": 1,
@@ -18,7 +18,7 @@
   "deleteCompletedInstances": false,
   "isPublished": true,
   "isLatest": true,
-  "createdAt": "2023-10-06T08:32:07.8125473Z",
+  "createdAt": "2023-10-06T12:28:19.4389359Z",
   "activities": [
     {
       "$id": "4",
@@ -36,7 +36,7 @@
           "syntax": "Json",
           "expressions": {
             "$id": "6",
-            "Json": "[\"Proceed\"]"
+            "Json": "[\"Proceed to Finish\"]"
           }
         }
       ],
@@ -121,7 +121,13 @@
       "sourceActivityId": "1ddc580a-b81e-4f1c-b581-c15e7548ed6c",
       "targetActivityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
       "outcome": "Done"
+    },
+    {
+      "$id": "22",
+      "sourceActivityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
+      "targetActivityId": "2d056cfe-1cde-4848-8e40-55de000b5891",
+      "outcome": "Proceed to Finish"
     }
   ],
-  "id": "17d2c3108a5b4bfbb0bbbdc07e7393dd"
+  "id": "02b672629120469292970668b2ac375f"
 }
