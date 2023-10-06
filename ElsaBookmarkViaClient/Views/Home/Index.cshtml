@@ -1,12 +1,23 @@
 ﻿@model IEnumerable<WorkflowInstance>
 @using Elsa.Client.Models
+@using Elsa.Client.Extended.Services
+@inject IWorkflowRegistryApi workflowRegistry
 @{
     ViewData["Title"] = "Home Page";
+    var providers = await workflowRegistry.ListProvidersAsync();
+    List<WorkflowBlueprintSummary> blueprints = new();
+    foreach (var provider in providers)
+    {
+        var workflowBlueprints = await workflowRegistry.ListByProviderAsync(provider.Name, versionOptions: VersionOptions.Published);
+        blueprints.AddRange(workflowBlueprints.Items);
+    }
 }
 <div class="text-center">
     <form method="post" asp-action="CreateWorkflowItem">
-        <button class="btn btn-primary" type="submit" value="BasicApproval" name="workflowName">Create Basic Approval item</button>
-        <button class="btn btn-primary" type="submit" value="DualApproval" name="workflowName">Create Dual Approval item</button>
+        @foreach (var workflow in blueprints)
+        {
+            <button class="btn btn-primary" type="submit" value="@workflow.Name" name="workflowName">Create @workflow.DisplayName item</button>
+        }
     </form>
 </div>
 
@@ -39,7 +50,7 @@
                             if (actions != null && actions["Actions"] != null)
                             {
                                 <form method="post" asp-action="SendWorkflowAction" asp-route-instanceId="@i.Id" asp-route-correlationId="@i.CorrelationId" asp-route-activityId="@activityId">
-                                    @foreach (var action in actions)
+                                    @foreach (var action in actions["Actions"])
                                     {
                                         <button class="btn btn-danger" type="submit" value="@action" name="action">@action</button>
                                     }

@@ -1,5 +1,9 @@
 using Elsa.Client.Extended.Extensions;
 using Elsa.Client.Options;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
+using Serilog.Exceptions;
 
 namespace ElsaBookmarkViaClient
 {
@@ -16,6 +20,21 @@ namespace ElsaBookmarkViaClient
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            LoggingLevelSwitch lls = new(LogEventLevel.Debug);
+            Log.Logger = new LoggerConfiguration()
+              .MinimumLevel.Debug()
+              .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+              .Enrich.WithExceptionDetails()
+              .Enrich.FromLogContext()
+              .MinimumLevel.ControlledBy(lls)
+              .WriteTo.Logger(l => l
+                    .WriteTo.Async(c => c.File("Logs/logs.txt",
+                        rollingInterval: RollingInterval.Day,
+                        fileSizeLimitBytes: 100000000,
+                        rollOnFileSizeLimit: true)))
+              .CreateLogger();
+            builder.Host.UseSerilog();
 
             var app = builder.Build();
 

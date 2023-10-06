@@ -11,11 +11,14 @@
     <PackageReference Include="Elsa.Core" Version="2.13.0" />
     <PackageReference Include="Elsa.Designer.Components.Web" Version="2.13.0" />
     <PackageReference Include="Elsa.Persistence.EntityFramework.SqlServer" Version="2.13.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Elsa.Activities.UserTask.Api\Elsa.Activities.UserTask.Api.csproj" />
     <ProjectReference Include="..\Elsa.Server.Api.Extended\Elsa.Server.Api.Extended.csproj" />
   </ItemGroup>
 

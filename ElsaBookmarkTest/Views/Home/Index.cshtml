@@ -1,12 +1,25 @@
 ﻿@model IEnumerable<WorkflowInstance>
+@inject IEnumerable<IWorkflowProvider> providers;
+@using Elsa.Providers.Workflows
 @using Elsa.Models
+@using Elsa.Services.Models
+@using Elsa.Services.WorkflowStorage
+@using Elsa.Services
 @{
     ViewData["Title"] = "Home Page";
+    List<IWorkflowBlueprint> blueprints = new();
+    foreach (var provider in providers.ToList())
+    {
+        var workflowBlueprints = await provider.ListAsync(VersionOptions.Published).ToListAsync();
+        blueprints.AddRange(workflowBlueprints);
+    }
 }
 <div class="text-center">
     <form method="post" asp-action="CreateWorkflowItem">
-        <button class="btn btn-primary" type="submit" value="BasicApproval" name="workflowName">Create Basic Approval item</button>
-        <button class="btn btn-primary" type="submit" value="DualApproval" name="workflowName">Create Dual Approval item</button>
+        @foreach (var workflow in blueprints)
+        {
+            <button class="btn btn-primary" type="submit" value="@workflow.Name" name="workflowName">Create @workflow.DisplayName item</button>
+        }
     </form>
 </div>
 

@@ -3,7 +3,9 @@ using Elsa.Activities.UserTask.Models;
 using Elsa.Models;
 using Elsa.Persistence;
 using Elsa.Persistence.Specifications.WorkflowInstances;
+using Elsa.Providers.Workflows;
 using Elsa.Services;
+using Elsa.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElsaBookmarkTest.Controllers
@@ -15,33 +17,38 @@ namespace ElsaBookmarkTest.Controllers
         private readonly IUserTaskService _userTaskService;
         private readonly IWorkflowInstanceStore _workflowInstanceStore;
         private readonly IWorkflowLaunchpad _workflowLaunchpad;
+        private readonly IEnumerable<IWorkflowProvider> _workflowProviders;
 
         public HomeController(
             ILogger<HomeController> logger,
             IWorkflowRegistry workflowRegistry,
             IUserTaskService userTaskService,
             IWorkflowInstanceStore workflowInstanceStore,
-            IWorkflowLaunchpad workflowLaunchpad)
+            IWorkflowLaunchpad workflowLaunchpad,
+            IEnumerable<IWorkflowProvider> workflowProviders)
         {
             _logger = logger;
             _workflowRegistry = workflowRegistry;
             _userTaskService = userTaskService;
             _workflowInstanceStore = workflowInstanceStore;
             _workflowLaunchpad = workflowLaunchpad;
+            _workflowProviders = workflowProviders;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(CancellationToken ct)
         {
             List<WorkflowInstance> instances = new();
-            var names = new[] { "BasicApproval", "DualApproval" };
-            foreach (var name in names)
+            List<IWorkflowBlueprint> blueprints = new();
+            foreach (var provider in _workflowProviders.ToList())
             {
-                var workflowBlueprint = await _workflowRegistry.FindByNameAsync(name, VersionOptions.LatestOrPublished, default, ct);
-                if (workflowBlueprint != null)
-                {
-                    instances.AddRange(await _workflowInstanceStore.FindManyAsync(new WorkflowDefinitionIdSpecification(workflowBlueprint.Id), cancellationToken: ct));
-                }
+                var workflowBlueprints = await provider.ListAsync(VersionOptions.Published).ToListAsync();
+                blueprints.AddRange(workflowBlueprints);
+            }
+
+            foreach (var blueprint in blueprints)
+            {
+                instances.AddRange(await _workflowInstanceStore.FindManyAsync(new WorkflowDefinitionIdSpecification(blueprint.Id), cancellationToken: ct));
             }
             return View(instances);
         }

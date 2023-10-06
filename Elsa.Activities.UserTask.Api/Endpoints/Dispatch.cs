@@ -1,7 +1,6 @@
 ﻿using Elsa.Activities.UserTask.Contracts;
 using Elsa.Activities.UserTask.Models;
 using Elsa.Server.Api.ActionFilters;
-using Elsa.Server.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -18,17 +17,15 @@ namespace Elsa.Activities.UserTask.Api.Endpoints
     public class Dispatch : Controller
     {
         private readonly IUserTaskService _userTaskService;
-        private readonly IEndpointContentSerializerSettingsProvider _serializerSettingsProvider;
 
-        public Dispatch(IUserTaskService userTaskService, IEndpointContentSerializerSettingsProvider serializerSettingsProvider)
+        public Dispatch(IUserTaskService userTaskService)
         {
             _userTaskService = userTaskService;
-            _serializerSettingsProvider = serializerSettingsProvider;
         }
 
         [HttpPost]
         [ElsaJsonFormatter]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TriggerUserActionResponse))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [SwaggerOperation(
             Summary = "Dispatchs the specified usertask.",
@@ -50,7 +47,7 @@ namespace Elsa.Activities.UserTask.Api.Endpoints
             if (Response.HasStarted)
                 return new EmptyResult();
 
-            return Json(new TriggerUserActionResponse(result.ToList()), _serializerSettingsProvider.GetSettings());
+            return Json(result.Any());
         }
     }
 }

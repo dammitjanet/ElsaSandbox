@@ -12,10 +12,10 @@ namespace Elsa.Client.Extended.Services
         #region added
 
         [Post("/v1/user-task/execute")]
-        Task<CollectedWorkflow?> ExecuteUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
+        Task<bool?> ExecuteUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
 
         [Post("/v1/user-task/dispatch")]
-        Task<CollectedWorkflow?> DisaptchUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
+        Task<TriggerUserActionResponse?> DisaptchUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
 
         #endregion
 

@@ -1,0 +1,127 @@
+{
+  "$id": "1",
+  "definitionId": "b8141ed536134c7bb5c805cad2afc4da",
+  "versionId": "17d2c3108a5b4bfbb0bbbdc07e7393dd",
+  "name": "SingleOutcome",
+  "displayName": "Single Outcome UserTask",
+  "version": 1,
+  "variables": {
+    "$id": "2",
+    "data": {}
+  },
+  "customAttributes": {
+    "$id": "3",
+    "data": {}
+  },
+  "isSingleton": false,
+  "persistenceBehavior": "WorkflowBurst",
+  "deleteCompletedInstances": false,
+  "isPublished": true,
+  "isLatest": true,
+  "createdAt": "2023-10-06T08:32:07.8125473Z",
+  "activities": [
+    {
+      "$id": "4",
+      "activityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
+      "type": "UserTask",
+      "name": "ProcessSingleOutcome",
+      "displayName": "User Task",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "5",
+          "name": "Actions",
+          "syntax": "Json",
+          "expressions": {
+            "$id": "6",
+            "Json": "[\"Proceed\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "7"
+      }
+    },
+    {
+      "$id": "8",
+      "activityId": "2d056cfe-1cde-4848-8e40-55de000b5891",
+      "type": "Finish",
+      "name": "Finish",
+      "displayName": "Finish",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "9",
+          "name": "ActivityOutput",
+          "expressions": {
+            "$id": "10"
+          }
+        },
+        {
+          "$id": "11",
+          "name": "OutcomeNames",
+          "expressions": {
+            "$id": "12"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "13"
+      }
+    },
+    {
+      "$id": "14",
+      "activityId": "1ddc580a-b81e-4f1c-b581-c15e7548ed6c",
+      "type": "SetName",
+      "name": "SetName",
+      "displayName": "Set Name",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "15",
+          "name": "Value",
+          "expressions": {
+            "$id": "16",
+            "Literal": "I'm free and single!"
+          }
+        }
+      ],
+      "propertyStorageProviders": {
+        "$id": "17"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "$id": "18",
+      "sourceActivityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
+      "targetActivityId": "2d056cfe-1cde-4848-8e40-55de000b5891",
+      "outcome": "Proceed"
+    },
+    {
+      "$id": "19",
+      "sourceActivityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
+      "targetActivityId": "2d056cfe-1cde-4848-8e40-55de000b5891",
+      "outcome": "Not done"
+    },
+    {
+      "$id": "20",
+      "sourceActivityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
+      "targetActivityId": "2d056cfe-1cde-4848-8e40-55de000b5891",
+      "outcome": "Nothing"
+    },
+    {
+      "$id": "21",
+      "sourceActivityId": "1ddc580a-b81e-4f1c-b581-c15e7548ed6c",
+      "targetActivityId": "c403a34c-9f21-4663-9351-ef0d2bbe59b9",
+      "outcome": "Done"
+    }
+  ],
+  "id": "17d2c3108a5b4bfbb0bbbdc07e7393dd"
+}

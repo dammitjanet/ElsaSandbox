@@ -21,15 +21,17 @@ namespace ElsaBookmarkViaClient.Controllers
         public async Task<IActionResult> Index(CancellationToken ct)
         {
             List<WorkflowInstance> instances = new();
-            var names = new[] { "BasicApproval", "DualApproval" };
-            foreach (var name in names)
+            var providers = await _elsaClient.WorkflowRegistry.ListProvidersAsync();
+            List<WorkflowBlueprintSummary> blueprints = new();
+            foreach (var provider in providers)
             {
-                var workflowBlueprint = await _elsaClient.WorkflowRegistry.GetByNameAsync(name, VersionOptions.LatestOrPublished, ct);
-                if (workflowBlueprint != null)
-                {
-                    var pagedList = await _elsaClient.WorkflowInstances.ListDetailedAsync(workflowDefinitionId: workflowBlueprint.Id, cancellationToken: ct);
-                    instances.AddRange(pagedList.Items);
-                }
+                var workflowBlueprints = await _elsaClient.WorkflowRegistry.ListByProviderAsync(provider.Name, versionOptions: VersionOptions.Published);
+                blueprints.AddRange(workflowBlueprints.Items);
+            }
+            foreach (var blueprint in blueprints)
+            {
+                var pagedList = await _elsaClient.WorkflowInstances.ListDetailedAsync(workflowDefinitionId: blueprint.Id, cancellationToken: ct);
+                instances.AddRange(pagedList.Items);
             }
             return View(instances);
         }
