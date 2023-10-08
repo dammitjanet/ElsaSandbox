@@ -1,10 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\configureawait.props" />
+  
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConfigureAwait.Fody" Version="3.3.2" />
     <PackageReference Include="Elsa.Activities.UserTask" Version="2.13.0" />
     <PackageReference Include="Elsa.Server.Api" Version="2.13.0" />
   </ItemGroup>

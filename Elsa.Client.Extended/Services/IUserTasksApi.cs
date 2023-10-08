@@ -15,7 +15,7 @@ namespace Elsa.Client.Extended.Services
         Task<bool?> ExecuteUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
 
         [Post("/v1/user-task/dispatch")]
-        Task<TriggerUserActionResponse?> DisaptchUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
+        Task<bool?> DisaptchUserActionAsync([Body] TriggerUserActionRequest context, CancellationToken cancellationToken = default);
 
         #endregion
 
