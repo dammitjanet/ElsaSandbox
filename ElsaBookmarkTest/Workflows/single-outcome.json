@@ -2,7 +2,7 @@
   "$id": "1",
   "definitionId": "d18fa8c9422a4208a3d1269c2ee56896",
   "versionId": "02b672629120469292970668b2ac375f",
-  "name": "SingleOutcome",
+  "name": "SingleUserTask",
   "displayName": "Single Outcome UserTask",
   "version": 1,
   "variables": {
